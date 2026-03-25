@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+:root {
+    --primary: #1e40af;
+    --primary-dark: #1e3a8a;
+    --primary-light: #3b82f6;
+    --accent: #4f46e5;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --bg: #f9fafb;
+    --card-bg: #ffffff;
+    --border: #e5e7eb;
+}
+
+/* Custom components */
+.nav-link {
+    @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200;
+}
+
+.nav-link.active {
+    @apply bg-blue-50 text-blue-700;
+}
+
+/* Mobile menu animation */
+.hamburger-line {
+    @apply block w-6 h-0.5 bg-gray-700 transition-all duration-300;
+}
+
+.hamburger-button.open .hamburger-line:first-child {
+    @apply transform rotate-45 translate-y-1.5;
+}
+
+.hamburger-button.open .hamburger-line:nth-child(2) {
+    @apply opacity-0;
+}
+
+.hamburger-button.open .hamburger-line:last-child {
+    @apply transform -rotate-45 -translate-y-1.5;
+}
