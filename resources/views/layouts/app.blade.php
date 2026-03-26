@@ -16,15 +16,15 @@
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "Church",
+        "@@context": "https://schema.org",
+        "@@type": "Church",
         "name": "BCF Church Fellowship",
         "alternateName": "Breakthrough Christian Fellowship",
         "url": "{{ url('/') }}",
         "logo": "{{ asset('images/bcf real logo.png') }}",
         "email": "Bcf.connect@gmail.com",
         "address": {
-            "@type": "PostalAddress",
+            "@@type": "PostalAddress",
             "addressLocality": "Santa Maria",
             "addressRegion": "Bulacan",
             "addressCountry": "PH"
