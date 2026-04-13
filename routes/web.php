@@ -14,7 +14,6 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\ScheduleController as AdminScheduleController;
 use App\Http\Controllers\Admin\LiveStreamController as AdminLiveStreamController;
 use App\Http\Controllers\Admin\InformationPageController;
-use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ChurchPersonController as AdminChurchPersonController;
 use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\CommunitySignupController;
@@ -138,10 +137,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         'update' => 'admin.church-people.update',
         'destroy' => 'admin.church-people.destroy',
     ]);
-    
-    // Settings
-    Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings.index');
-    Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
     
 });
 
