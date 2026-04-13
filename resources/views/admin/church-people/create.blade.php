@@ -19,8 +19,7 @@
                 <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
                 <select name="role" id="role" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                     <option value="">Select a role</option>
-                    <option value="Founding Pastors" {{ old('role') == 'Founding Pastors' ? 'selected' : '' }}>Founding Pastors</option>
-                    <option value="Main Pastor" {{ old('role') == 'Main Pastor' ? 'selected' : '' }}>Main Pastor</option>
+                    <option value="Founding Pastor" {{ old('role') == 'Founding Pastor' ? 'selected' : '' }}>Founding Pastor</option>
                     <option value="Pastor" {{ old('role') == 'Pastor' ? 'selected' : '' }}>Pastor</option>
                     <option value="Singer" {{ old('role') == 'Singer' ? 'selected' : '' }}>Singer</option>
                     <option value="Band Member" {{ old('role') == 'Band Member' ? 'selected' : '' }}>Band Member</option>
