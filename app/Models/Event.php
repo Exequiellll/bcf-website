@@ -31,4 +31,10 @@ class Event extends Model
     {
         return $query->where('event_date', '>=', now());
     }
+
+    public function scopePast($query)
+    {
+        return $query->where('event_date', '<', now())
+            ->where('event_date', '>=', now()->subDays(7));
+    }
 }

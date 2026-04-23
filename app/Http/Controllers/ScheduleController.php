@@ -10,11 +10,17 @@ class ScheduleController extends Controller
     public function index()
     {
         $schedules = Schedule::active()
+            ->upcoming()
             ->ordered()
             ->get()
-            ->unique('title') // Ensure we don't show duplicate schedule entries
+            ->unique('title')
             ->groupBy('day_of_week');
 
-        return view('schedules.index', compact('schedules'));
+        $pastSchedules = Schedule::active()
+            ->past()
+            ->orderBy('event_date', 'desc')
+            ->get();
+
+        return view('schedules.index', compact('schedules', 'pastSchedules'));
     }
 }

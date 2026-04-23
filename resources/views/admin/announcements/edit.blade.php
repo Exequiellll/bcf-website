@@ -22,6 +22,12 @@
             </div>
             
             <div class="mb-4">
+                <label for="event_date" class="block text-sm font-medium text-gray-700">Happens On (optional)</label>
+                <input type="datetime-local" name="event_date" id="event_date" value="{{ old('event_date', $announcement->event_date ? $announcement->event_date->format('Y-m-d\TH:i') : '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <p class="mt-1 text-xs text-gray-500">If this announcement is about something that happens on a specific date, set it here. After the date passes, it moves to "Past" for 7 days then auto-deletes.</p>
+            </div>
+
+            <div class="mb-4">
                 <label for="published_at" class="block text-sm font-medium text-gray-700">Published Date</label>
                 <input type="date" name="published_at" id="published_at" value="{{ old('published_at', $announcement->published_at ? $announcement->published_at->format('Y-m-d') : '') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>

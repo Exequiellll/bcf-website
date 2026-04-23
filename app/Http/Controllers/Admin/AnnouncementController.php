@@ -24,6 +24,7 @@ class AnnouncementController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'event_date' => 'nullable|date',
             'is_published' => 'boolean',
             'published_at' => 'nullable|date',
         ]);
@@ -58,6 +59,7 @@ class AnnouncementController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'event_date' => 'nullable|date',
             'is_published' => 'boolean',
             'published_at' => 'nullable|date',
         ]);

@@ -15,7 +15,7 @@ class EventController extends Controller
             ->get();
 
         $pastEvents = Event::published()
-            ->where('event_date', '<', now())
+            ->past()
             ->orderBy('event_date', 'desc')
             ->get();
 

@@ -12,6 +12,7 @@ class Schedule extends Model
         'start_time',
         'end_time',
         'description',
+        'event_date',
         'location',
         'is_active',
         'sort_order',
@@ -21,6 +22,7 @@ class Schedule extends Model
     {
         return [
             'is_active' => 'boolean',
+            'event_date' => 'datetime',
         ];
     }
 
@@ -32,5 +34,20 @@ class Schedule extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('sort_order')->orderBy('start_time');
+    }
+
+    public function scopeUpcoming($query)
+    {
+        return $query->where(function ($q) {
+            $q->whereNull('event_date')
+              ->orWhere('event_date', '>=', now());
+        });
+    }
+
+    public function scopePast($query)
+    {
+        return $query->whereNotNull('event_date')
+            ->where('event_date', '<', now())
+            ->where('event_date', '>=', now()->subDays(7));
     }
 }
