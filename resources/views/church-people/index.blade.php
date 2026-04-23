@@ -20,9 +20,9 @@
     @if($featured->count() > 0)
         <div class="mb-16">
             <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center logo-text">Featured</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="flex flex-wrap justify-center gap-8">
                 @foreach($featured as $person)
-                    <a href="{{ route('church-people.show', $person->id) }}" class="bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:shadow-xl transition-all duration-300 border border-blue-100 cursor-pointer block group">
+                    <a href="{{ route('church-people.show', $person->id) }}" class="w-full sm:w-80 lg:w-96 bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:shadow-xl transition-all duration-300 border border-blue-100 cursor-pointer block group">
                         @if($person->photo)
                             <div class="h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
                                 <img src="{{ $person->photo }}" alt="{{ $person->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy">
@@ -56,9 +56,9 @@
     @if($foundingPastors->count() > 0)
         <div class="mb-16">
             <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center logo-text">Founding Pastor</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="flex flex-wrap justify-center gap-8">
                 @foreach($foundingPastors as $person)
-                    <a href="{{ route('church-people.show', $person->id) }}" class="bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:shadow-xl transition-all duration-300 border border-blue-100 cursor-pointer block group">
+                    <a href="{{ route('church-people.show', $person->id) }}" class="w-full sm:w-80 lg:w-96 bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:shadow-xl transition-all duration-300 border border-blue-100 cursor-pointer block group">
                         @if($person->photo)
                             <div class="h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
                                 <img src="{{ $person->photo }}" alt="{{ $person->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy">
@@ -92,9 +92,9 @@
     @if($pastors->count() > 0)
         <div class="mb-16">
             <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center logo-text">Pastors</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex flex-wrap justify-center gap-6">
                 @foreach($pastors as $person)
-                    <a href="{{ route('church-people.show', $person->id) }}" class="bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 border border-blue-100 cursor-pointer block group">
+                    <a href="{{ route('church-people.show', $person->id) }}" class="w-full sm:w-64 lg:w-72 bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 border border-blue-100 cursor-pointer block group">
                         @if($person->photo)
                             <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600">
                                 <img src="{{ $person->photo }}" alt="{{ $person->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy">
@@ -119,9 +119,9 @@
     @if($singers->count() > 0)
         <div class="mb-16">
             <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center logo-text">Worship Team</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex flex-wrap justify-center gap-6">
                 @foreach($singers as $person)
-                    <a href="{{ route('church-people.show', $person->id) }}" class="bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 border border-blue-100 cursor-pointer block group">
+                    <a href="{{ route('church-people.show', $person->id) }}" class="w-full sm:w-64 lg:w-72 bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 border border-blue-100 cursor-pointer block group">
                         @if($person->photo)
                             <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600">
                                 <img src="{{ $person->photo }}" alt="{{ $person->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy">
@@ -146,9 +146,9 @@
     @if($bandMembers->count() > 0)
         <div class="mb-16">
             <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center logo-text">Band</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex flex-wrap justify-center gap-6">
                 @foreach($bandMembers as $person)
-                    <a href="{{ route('church-people.show', $person->id) }}" class="bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 border border-blue-100 cursor-pointer block group">
+                    <a href="{{ route('church-people.show', $person->id) }}" class="w-full sm:w-64 lg:w-72 bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 border border-blue-100 cursor-pointer block group">
                         @if($person->photo)
                             <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600">
                                 <img src="{{ $person->photo }}" alt="{{ $person->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy">
@@ -173,9 +173,9 @@
     @if($leaders->count() > 0)
         <div class="mb-16">
             <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center logo-text">Leaders</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex flex-wrap justify-center gap-6">
                 @foreach($leaders as $person)
-                    <a href="{{ route('church-people.show', $person->id) }}" class="bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 border border-blue-100 cursor-pointer block group">
+                    <a href="{{ route('church-people.show', $person->id) }}" class="w-full sm:w-64 lg:w-72 bg-white/95 backdrop-blur-md rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 border border-blue-100 cursor-pointer block group">
                         @if($person->photo)
                             <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600">
                                 <img src="{{ $person->photo }}" alt="{{ $person->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy">
@@ -197,11 +197,5 @@
         </div>
     @endif
 
-    @if($pastors->count() == 0 && $singers->count() == 0 && $bandMembers->count() == 0 && $leaders->count() == 0 && $featured->count() == 0)
-        <div class="text-center py-16">
-            <p class="text-gray-500 text-lg">Team information coming soon!</p>
-        </div>
-    @endif
 </div>
 @endsection
-
