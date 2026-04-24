@@ -6,9 +6,9 @@
 <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     <div class="px-4 py-6 sm:px-0">
         <div class="mb-6">
-            <div class="flex justify-between items-center mb-2">
-                <h1 class="text-3xl font-bold text-gray-900">Schedules</h1>
-                <a href="{{ route('admin.schedules.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-2">
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Schedules</h1>
+                <a href="{{ route('admin.schedules.create') }}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
@@ -35,27 +35,24 @@
             <ul class="divide-y divide-gray-200">
                 @forelse($schedules as $schedule)
                     <li>
-                        <div class="px-4 py-4 sm:px-6 flex justify-between items-center">
-                            <div class="flex-1">
-                                <h3 class="text-lg font-medium text-gray-900">{{ $schedule->title }}</h3>
-                                <p class="text-sm text-gray-500 mt-1">
-                                    {{ $schedule->day_of_week }} - {{ $schedule->start_time }}
-                                    @if($schedule->end_time)
-                                        to {{ $schedule->end_time }}
-                                    @endif
+                        <div class="px-4 py-4 sm:px-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-base sm:text-lg font-medium text-gray-900 break-words">{{ $schedule->title }}</h3>
+                                <p class="text-sm text-gray-500 mt-1 flex flex-wrap items-center gap-2">
+                                    <span>{{ $schedule->day_of_week }} - {{ $schedule->start_time }}@if($schedule->end_time) to {{ $schedule->end_time }}@endif</span>
                                     @if($schedule->is_active)
-                                        <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
                                     @else
-                                        <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Inactive</span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Inactive</span>
                                     @endif
                                 </p>
                             </div>
-                            <div class="flex space-x-2">
-                                <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                            <div class="flex space-x-3 sm:flex-shrink-0">
+                                <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="text-blue-600 hover:text-blue-900 font-medium">Edit</a>
                                 <form method="POST" action="{{ route('admin.schedules.destroy', $schedule->id) }}" onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+                                    <button type="submit" class="text-red-600 hover:text-red-900 font-medium">Delete</button>
                                 </form>
                             </div>
                         </div>

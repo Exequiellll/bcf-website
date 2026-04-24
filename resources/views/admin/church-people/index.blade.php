@@ -6,9 +6,9 @@
 <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     <div class="px-4 py-6 sm:px-0">
         <div class="mb-6">
-            <div class="flex justify-between items-center mb-2">
-                <h1 class="text-3xl font-bold text-gray-900">Church People</h1>
-                <a href="{{ route('admin.church-people.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-2">
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Church People</h1>
+                <a href="{{ route('admin.church-people.create') }}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
@@ -35,31 +35,31 @@
             <ul class="divide-y divide-gray-200">
                 @forelse($people as $person)
                     <li>
-                        <div class="px-4 py-4 sm:px-6 flex justify-between items-center">
-                            <div class="flex items-center flex-1">
+                        <div class="px-4 py-4 sm:px-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                            <div class="flex items-center flex-1 min-w-0">
                                 @if($person->photo)
-                                    <img src="{{ $person->photo }}" alt="{{ $person->name }}" class="h-12 w-12 rounded-full mr-4 object-cover">
+                                    <img src="{{ $person->photo }}" alt="{{ $person->name }}" class="h-12 w-12 rounded-full mr-4 object-cover flex-shrink-0">
                                 @else
-                                    <div class="h-12 w-12 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                                    <div class="h-12 w-12 rounded-full bg-blue-500 flex items-center justify-center mr-4 flex-shrink-0">
                                         <span class="text-white font-bold">{{ substr($person->name, 0, 1) }}</span>
                                     </div>
                                 @endif
-                                <div class="flex-1">
-                                    <h3 class="text-lg font-medium text-gray-900">{{ $person->name }}</h3>
-                                    <p class="text-sm text-gray-500 mt-1">
-                                        {{ $person->role }}
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-base sm:text-lg font-medium text-gray-900 break-words">{{ $person->name }}</h3>
+                                    <p class="text-sm text-gray-500 mt-1 flex flex-wrap items-center gap-2">
+                                        <span>{{ $person->role }}</span>
                                         @if($person->is_featured)
-                                            <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Featured</span>
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Featured</span>
                                         @endif
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex space-x-2">
-                                <a href="{{ route('admin.church-people.edit', $person->id) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                            <div class="flex space-x-3 sm:flex-shrink-0 pl-16 sm:pl-0">
+                                <a href="{{ route('admin.church-people.edit', $person->id) }}" class="text-blue-600 hover:text-blue-900 font-medium">Edit</a>
                                 <form method="POST" action="{{ route('admin.church-people.destroy', $person->id) }}" onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+                                    <button type="submit" class="text-red-600 hover:text-red-900 font-medium">Delete</button>
                                 </form>
                             </div>
                         </div>

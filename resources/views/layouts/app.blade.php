@@ -55,6 +55,11 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
         /* Header Scroll Behavior */
         .header-transition {
             transition: transform 0.3s ease-in-out;
@@ -286,7 +291,7 @@
     <!-- Fixed Header Container -->
     <div style="position: relative;">
         <header id="main-header" class="header-transition" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 50 !important; background-color: rgba(255, 255, 255, 0.95) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important; width: 100% !important; margin: 0 !important; padding: 0 !important;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" x-data="{ mobileOpen: false }">
             <div class="flex items-center justify-between h-20 w-full">
                 <!-- Logo -->
                 <div class="flex-shrink-0 w-48">
@@ -347,42 +352,63 @@
                                     <i class="fas fa-hand-holding-heart text-gray-800 w-6"></i>
                                     <span class="ml-3">Donation</span>
                                 </a>
-                                <a href="{{ route('about') }}" class="menu-item flex items-center px-6 py-4 text-black hover:bg-gray-100 transition-colors group {{ request()->routeIs('about') ?  : '' }}" role="menuitem">
+                                <a href="{{ route('about') }}" class="menu-item flex items-center px-6 py-4 text-black hover:bg-gray-100 transition-colors group" role="menuitem">
                                     <div class="absolute left-0 top-0 bottom-0 w-1 bg-transparent group-hover:bg-blue-600 transition-colors"></div>
                                     <i class="fas fa-info-circle text-gray-800 w-6"></i>
                                     <span class="ml-3">About Us</span>
                                 </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="flex-shrink-0 md:hidden">
-                    <button id="mobile-menu-button" type="button" class="text-gray-700 hover:text-blue-700 focus:outline-none px-4 py-2" aria-expanded="false" aria-controls="mobile-menu">
-                        <i class="fas fa-bars text-2xl"></i>
+                    <button id="mobile-menu-button" type="button"
+                        @click="mobileOpen = !mobileOpen"
+                        :aria-expanded="mobileOpen.toString()"
+                        class="text-gray-700 hover:text-blue-700 focus:outline-none px-4 py-2 transition-transform"
+                        aria-controls="mobile-menu">
+                        <i class="fas text-2xl transition-all duration-300" :class="mobileOpen ? 'fa-times rotate-90' : 'fa-bars'"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile menu (hidden by default) -->
-            <div id="mobile-menu" class="hidden md:hidden" aria-hidden="true">
+            <div id="mobile-menu"
+                x-show="mobileOpen"
+                x-cloak
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 -translate-y-2 max-h-0"
+                x-transition:enter-end="opacity-100 translate-y-0 max-h-screen"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 max-h-screen"
+                x-transition:leave-end="opacity-0 -translate-y-2 max-h-0"
+                @click.outside="mobileOpen = false"
+                class="md:hidden overflow-hidden border-t border-gray-100">
                 <div class="pt-2 pb-3 space-y-1">
-                    <a href="{{ route('home') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('home') ? 'bg-gray-50 text-blue-700' : '' }}">
+                    <a href="{{ route('home') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('home') ? 'bg-gray-50 text-blue-700' : '' }}">
                         <i class="fas fa-home mr-2"></i> Home
                     </a>
-                    <a href="{{ route('announcements.index') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('announcements.*') ? 'bg-gray-50 text-blue-700' : '' }}">
+                    <a href="{{ route('announcements.index') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('announcements.*') ? 'bg-gray-50 text-blue-700' : '' }}">
                         <i class="fas fa-bullhorn mr-2"></i> Announcements
                     </a>
-                    <a href="{{ route('events.index') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('events.*') ? 'bg-gray-50 text-blue-700' : '' }}">
+                    <a href="{{ route('events.index') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('events.*') ? 'bg-gray-50 text-blue-700' : '' }}">
                         <i class="fas fa-calendar-alt mr-2"></i> Events
                     </a>
-                    <a href="{{ route('schedules.index') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('schedules.*') ? 'bg-gray-50 text-blue-700' : '' }}">
+                    <a href="{{ route('schedules.index') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('schedules.*') ? 'bg-gray-50 text-blue-700' : '' }}">
                         <i class="fas fa-clock mr-2"></i> Schedule
                     </a>
-                    <a href="{{ route('church-people.index') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('church-people.*') ? 'bg-gray-50 text-blue-700' : '' }}">
+                    <a href="{{ route('church-people.index') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('church-people.*') ? 'bg-gray-50 text-blue-700' : '' }}">
                         <i class="fas fa-users mr-2"></i> Our Team
                     </a>
-                    <a href="{{ route('about') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('about') ? 'bg-gray-50 text-blue-700' : '' }}">
+                    <a href="{{ route('join') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('join') ? 'bg-gray-50 text-blue-700' : '' }}">
+                        <i class="fas fa-user-plus mr-2"></i> Join Us
+                    </a>
+                    <a href="{{ route('donate') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('donate') ? 'bg-gray-50 text-blue-700' : '' }}">
+                        <i class="fas fa-hand-holding-heart mr-2"></i> Donation
+                    </a>
+                    <a href="{{ route('about') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('about') ? 'bg-gray-50 text-blue-700' : '' }}">
                         <i class="fas fa-info-circle mr-2"></i> About Us
                     </a>
                 </div>
@@ -508,19 +534,6 @@
     </script>
 
     <script>
-        // Close mobile menu function
-        function closeMobileMenu() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            if (mobileMenu) {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.setAttribute('aria-hidden', 'true');
-            }
-            if (mobileMenuButton) {
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
-            }
-        }
-
         // Close desktop menu function
         function closeDesktopMenu() {
             const desktopDropdown = document.getElementById('desktop-dropdown');
@@ -558,22 +571,9 @@
             });
         });
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Desktop dropdown elements (mobile menu handled by Alpine.js)
         const desktopMenuButton = document.getElementById('desktop-menu-button');
         const desktopDropdown = document.getElementById('desktop-dropdown');
-
-        // Toggle mobile menu
-        mobileMenuButton.addEventListener('click', function() {
-            const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-            this.setAttribute('aria-expanded', !expanded);
-            mobileMenu.classList.toggle('hidden');
-            
-            // Toggle hamburger animation
-            const hamburger = document.querySelector('.hamburger-icon');
-            hamburger.classList.toggle('open');
-        });
 
         // Enhanced desktop dropdown menu toggle with pull animation
         desktopMenuButton.addEventListener('click', function(e) {

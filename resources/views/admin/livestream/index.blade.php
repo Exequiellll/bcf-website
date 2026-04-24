@@ -6,11 +6,11 @@
 <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     <div class="px-4 py-6 sm:px-0">
         <div class="mb-6">
-            <div class="flex justify-between items-center mb-2">
-                <h1 class="text-3xl font-bold text-gray-900">Live Stream Management</h1>
-                <div class="flex items-center space-x-2">
-                    <button id="toggle-live-btn" 
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-md transition-all {{ $isLive ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-green-600 hover:bg-green-700 text-white' }}"
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-2">
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Live Stream Management</h1>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button id="toggle-live-btn"
+                            class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-md transition-all {{ $isLive ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-green-600 hover:bg-green-700 text-white' }}"
                             data-is-live="{{ $isLive ? 'true' : 'false' }}">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             @if($isLive)
@@ -23,7 +23,7 @@
                         </svg>
                         {{ $isLive ? 'Stop Stream' : 'Go Live' }}
                     </button>
-                    <a href="{{ route('live-stream') }}" target="_blank" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 shadow-md hover:shadow-lg transition-all">
+                    <a href="{{ route('live-stream') }}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 shadow-md hover:shadow-lg transition-all">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                         </svg>
