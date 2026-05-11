@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin') - {{ config('app.name', 'Church Website') }}</title>
 
     <!-- Fonts -->
@@ -10,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    @vite(['resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -51,6 +52,7 @@
                         <a href="{{ route('admin.events.index') }}" class="nav-link border-transparent text-gray-600 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-colors {{ request()->routeIs('admin.events.*') ? 'border-blue-500 text-blue-600' : '' }}">Events</a>
                         <a href="{{ route('admin.schedules.index') }}" class="nav-link border-transparent text-gray-600 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-colors {{ request()->routeIs('admin.schedules.*') ? 'border-blue-500 text-blue-600' : '' }}">Schedules</a>
                         <a href="{{ route('admin.church-people.index') }}" class="nav-link border-transparent text-gray-600 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-colors {{ request()->routeIs('admin.church-people.*') ? 'border-blue-500 text-blue-600' : '' }}">Team</a>
+                        <a href="{{ route('admin.sermon-slides.index') }}" class="nav-link border-transparent text-gray-600 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-colors {{ request()->routeIs('admin.sermon-slides.*') ? 'border-blue-500 text-blue-600' : '' }}">Sunday Sermon</a>
                         <a href="{{ route('admin.livestream.index') }}" class="nav-link border-transparent text-gray-600 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-colors {{ request()->routeIs('admin.livestream.*') ? 'border-blue-500 text-blue-600' : '' }}">Live Stream</a>
                         <a href="{{ route('admin.inbox.index') }}" class="nav-link border-transparent text-gray-600 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-3 py-2 border-b-2 text-sm font-medium transition-colors {{ request()->routeIs('admin.inbox.*') ? 'border-blue-500 text-blue-600' : '' }}">
                             Inbox
@@ -100,6 +102,7 @@
                 <a href="{{ route('admin.events.index') }}" @click="mobileOpen = false" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('admin.events.*') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:bg-gray-50' }}">Events</a>
                 <a href="{{ route('admin.schedules.index') }}" @click="mobileOpen = false" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('admin.schedules.*') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:bg-gray-50' }}">Schedules</a>
                 <a href="{{ route('admin.church-people.index') }}" @click="mobileOpen = false" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('admin.church-people.*') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:bg-gray-50' }}">Team</a>
+                <a href="{{ route('admin.sermon-slides.index') }}" @click="mobileOpen = false" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('admin.sermon-slides.*') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:bg-gray-50' }}">Sunday Sermon</a>
                 <a href="{{ route('admin.livestream.index') }}" @click="mobileOpen = false" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('admin.livestream.*') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:bg-gray-50' }}">Live Stream</a>
                 <a href="{{ route('admin.inbox.index') }}" @click="mobileOpen = false" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('admin.inbox.*') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:bg-gray-50' }}">
                     Inbox
@@ -150,5 +153,7 @@
 
         @yield('content')
     </main>
+
+    @stack('scripts')
 </body>
 </html>

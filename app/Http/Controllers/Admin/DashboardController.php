@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\Event;
 use App\Models\Schedule;
-use App\Models\InformationPage;
-use Illuminate\Http\Request;
+use App\Models\SermonSlide;
 
 class DashboardController extends Controller
 {
@@ -17,7 +16,7 @@ class DashboardController extends Controller
             'announcements' => Announcement::count(),
             'events' => Event::count(),
             'schedules' => Schedule::count(),
-            'pages' => InformationPage::count(),
+            'sermon' => SermonSlide::first(),
         ];
 
         $recentAnnouncements = Announcement::latest()->take(5)->get();

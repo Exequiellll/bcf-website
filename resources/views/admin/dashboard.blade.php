@@ -145,22 +145,34 @@
                 </div>
             </div>
             
-            <!-- Pages Card -->
+            <!-- Sunday Sermon Card -->
             <div class="stat-card bg-white overflow-hidden shadow-lg rounded-xl border-l-4 border-orange-500 hover-lift animate-fade-in-up" style="--delay: 4">
                 <div class="p-4 sm:p-6">
                     <div class="flex items-center justify-between">
                         <div class="flex-1 min-w-0">
-                            <p class="text-xs sm:text-sm font-medium text-gray-600 mb-1">Pages</p>
-                            <p class="text-2xl sm:text-3xl font-bold text-gray-900">{{ $stats['pages'] }}</p>
-                            <p class="text-xs text-gray-500 mt-2 hidden sm:block">Info pages</p>
+                            <p class="text-xs sm:text-sm font-medium text-gray-600 mb-1">Sunday Sermon</p>
+                            @if($stats['sermon'])
+                                <p class="text-base sm:text-lg font-bold text-gray-900 truncate">{{ $stats['sermon']->title }}</p>
+                                <p class="text-xs text-gray-500 mt-2 hidden sm:block">
+                                    @if($stats['sermon']->is_published)
+                                        <span class="text-green-600">● Live</span>
+                                    @else
+                                        <span class="text-gray-500">○ Hidden</span>
+                                    @endif
+                                    · {{ count($stats['sermon']->slides) }} slides
+                                </p>
+                            @else
+                                <p class="text-2xl sm:text-3xl font-bold text-gray-400">—</p>
+                                <p class="text-xs text-gray-500 mt-2 hidden sm:block">Not uploaded yet</p>
+                            @endif
                         </div>
                         <div class="p-2 sm:p-4 bg-orange-100 rounded-full hidden sm:block">
                             <svg class="h-8 w-8 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
                         </div>
                     </div>
-                    <a href="{{ route('admin.information-pages.index') }}" class="mt-4 inline-flex items-center text-sm text-orange-600 hover:text-orange-800 font-medium">
+                    <a href="{{ route('admin.sermon-slides.index') }}" class="mt-4 inline-flex items-center text-sm text-orange-600 hover:text-orange-800 font-medium">
                         Manage <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                 </div>

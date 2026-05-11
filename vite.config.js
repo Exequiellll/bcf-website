@@ -29,13 +29,9 @@ export default defineConfig({
         },
     },
     build: {
-        manifest: true,
+        manifest: 'manifest.json',
         outDir: 'public/build',
         rollupOptions: {
-            input: {
-                app: 'resources/js/app.js',
-                css: 'resources/css/app.css'
-            },
             output: {
                 entryFileNames: 'assets/[name].js',
                 chunkFileNames: 'assets/[name].js',

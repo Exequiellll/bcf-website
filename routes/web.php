@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\AnnouncementController as AdminAnnouncementContro
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\ScheduleController as AdminScheduleController;
 use App\Http\Controllers\Admin\LiveStreamController as AdminLiveStreamController;
-use App\Http\Controllers\Admin\InformationPageController;
+use App\Http\Controllers\Admin\SermonSlideController;
 use App\Http\Controllers\Admin\ChurchPersonController as AdminChurchPersonController;
 use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\CommunitySignupController;
@@ -108,16 +108,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         'destroy' => 'admin.schedules.destroy',
     ]);
     
-    // Information Pages
-    Route::resource('information-pages', InformationPageController::class)->names([
-        'index' => 'admin.information-pages.index',
-        'create' => 'admin.information-pages.create',
-        'store' => 'admin.information-pages.store',
-        'show' => 'admin.information-pages.show',
-        'edit' => 'admin.information-pages.edit',
-        'update' => 'admin.information-pages.update',
-        'destroy' => 'admin.information-pages.destroy',
-    ]);
+    // Sermon Slides (Sunday sermon presentation)
+    Route::prefix('sermon-slides')->name('admin.sermon-slides.')->group(function () {
+        Route::get('/', [SermonSlideController::class, 'index'])->name('index');
+        Route::post('/', [SermonSlideController::class, 'store'])->name('store');
+        Route::delete('/', [SermonSlideController::class, 'destroy'])->name('destroy');
+        Route::post('/toggle', [SermonSlideController::class, 'toggle'])->name('toggle');
+        Route::post('/reorder', [SermonSlideController::class, 'reorder'])->name('reorder');
+    });
 
     // Inbox - Community Signups
     Route::prefix('inbox')->name('admin.inbox.')->group(function () {

@@ -934,116 +934,213 @@
     </div>
 </section>
 
-<!-- Church Family Carousel Section -->
+@if($sermon && $sermon->is_published && count($sermon->slides) > 0)
+<!-- Sunday Sermon Slides Section -->
+<section id="sunday-sermon-section" class="py-16 md:py-24 relative overflow-hidden lazy-section"
+         x-data="sermonCarousel({{ count($sermon->slides) }})"
+         style="background: linear-gradient(180deg, #f8fafc 0%, #eff6ff 100%);">
 
-<section id="church-family-carousel" class="py-16 md:py-24 relative overflow-hidden" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
-    <!-- Decorative Elements -->
-    <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute -right-20 -top-20 w-64 h-64 bg-blue-500/5 rounded-full filter blur-3xl"></div>
-        <div class="absolute -left-20 -bottom-20 w-72 h-72 bg-indigo-500/5 rounded-full filter blur-3xl"></div>
-    </div>
-    
+    <!-- Decorative background pattern -->
+    <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22><path d=%22M30 0L30 60M0 30L60 30%22 stroke=%22%231e40af%22 stroke-width=%220.5%22/></svg>');"></div>
+    <div class="absolute -right-32 top-12 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none"></div>
+    <div class="absolute -left-32 bottom-12 w-96 h-96 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none"></div>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="flex flex-col lg:flex-row gap-12 items-center">
-            <!-- Left Column - Text Content -->
-            <div class="w-full lg:w-5/12">
-                <div class="max-w-lg mx-auto lg:mx-0">
-                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                        Experience the <span class="text-blue-300">Warmth</span> of Our Church Family
-                    </h2>
-                    <p class="text-lg text-blue-100 mb-8 leading-relaxed">
-                        Join our vibrant community where faith grows, relationships flourish, and lives are transformed through the love of Christ.
-                    </p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 mt-1">
-                                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                                    <i class="fas fa-hands-praying text-blue-300"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold text-white mb-1">Inspiring Worship</h3>
-                                <p class="text-blue-100">Experience the presence of God through our uplifting worship services.</p>
-                            </div>
+
+        <!-- Section Title Bar -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-blue-100 mb-6">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                </span>
+                <span class="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">From This Sunday's Service</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3" style="line-height: 1.15;">
+                Catch Up on the <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Sermon</span>
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Missed Sunday or want to revisit the message? Browse this week's presentation slides below.
+            </p>
+        </div>
+
+        <!-- Main content card -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+
+            <!-- LEFT: Sermon details -->
+            <div class="lg:col-span-4 flex">
+                <div class="modern-card slide-left w-full overflow-hidden flex flex-col">
+                    <!-- Header strip -->
+                    <div class="px-6 py-5 text-white relative overflow-hidden" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-white/10 rounded-full"></div>
+                        <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-white/5 rounded-full"></div>
+                        <div class="relative">
+                            <i class="fas fa-book-bible text-3xl text-blue-200 mb-2"></i>
+                            <p class="text-xs font-bold uppercase tracking-widest text-blue-200">Sunday Message</p>
                         </div>
-                        
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 mt-1">
-                                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                                    <i class="fas fa-people-group text-blue-300"></i>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="p-6 md:p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style="line-height: 1.2;">
+                            {{ $sermon->title }}
+                        </h3>
+
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center text-gray-700">
+                                <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <i class="far fa-calendar-alt text-blue-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-wide">Preached On</p>
+                                    <p class="font-semibold text-gray-800">{{ $sermon->sermon_date->format('F d, Y') }}</p>
                                 </div>
                             </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold text-white mb-1">Loving Community</h3>
-                                <p class="text-blue-100">Connect with others and build meaningful relationships.</p>
+
+                            @if($sermon->speaker)
+                                <div class="flex items-center text-gray-700">
+                                    <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <i class="fas fa-microphone-alt text-blue-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-500 uppercase tracking-wide">Speaker</p>
+                                        <p class="font-semibold text-gray-800">{{ $sermon->speaker }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="flex items-center text-gray-700">
+                                <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <i class="far fa-images text-blue-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-wide">Slides</p>
+                                    <p class="font-semibold text-gray-800">
+                                        <span x-text="current + 1"></span> of {{ count($sermon->slides) }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                         <div class="flex items-start">
-                            <div class="flex-shrink-0 mt-1">
-                                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-                                    <i class="fas fa-hands-helping text-blue-300"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-xl font-semibold text-white mb-1">Service & Outreach</h3>
-                                <p class="text-blue-100">Connect with us through acts of worship</p>
+                        <div class="mt-auto pt-6 border-t border-gray-100">
+                            <div class="flex flex-col gap-2">
+                                <a href="{{ route('live-stream') }}" class="inline-flex items-center justify-center px-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg">
+                                    <i class="fas fa-play-circle mr-2"></i> Watch Live Service
+                                </a>
+                                <a href="{{ route('schedules.index') }}" class="inline-flex items-center justify-center px-5 py-3 bg-blue-50 text-blue-700 text-sm font-semibold rounded-xl hover:bg-blue-100 transition-colors">
+                                    <i class="far fa-clock mr-2"></i> View Service Times
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column - Carousel -->
-            <div class="w-full lg:w-7/12 relative">
-                <div class="relative overflow-hidden rounded-2xl bg-transparent">
-                    <div id="gallery-carousel" class="relative w-full h-[500px] overflow-visible">
-                        <!-- Carousel Items -->
-                        <div class="carousel-item absolute inset-0 w-full h-full transition-all duration-700 ease-in-out opacity-100" data-index="0" style="opacity: 1;">
-                            <div class="w-full h-full flex items-center justify-center">
-                                <img src="{{ asset('images/churchAct1.jpg') }}"
-                                     alt="Worship Service"
-                                     class="rounded-2xl mx-auto h-full w-auto object-contain"
-                                     style="max-width: 100%; max-height: 100%; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);"
-                                     loading="eager"
-                                     onerror="console.error('Error loading image:', this.src); this.src='https://placehold.co/800x500/1e40af/ffffff?text=Worship+Service'">
-                            </div>
+            <!-- RIGHT: Slides Carousel -->
+            <div class="lg:col-span-8 flex">
+                <div class="modern-card slide-right w-full overflow-hidden flex flex-col"
+                     @mouseenter="pause()"
+                     @mouseleave="resume()"
+                     @keydown.window.arrow-left="prev()"
+                     @keydown.window.arrow-right="next()">
+                    <!-- Toolbar -->
+                    <div class="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-100">
+                        <div class="flex items-center gap-2">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-60"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                            </span>
+                            <span class="text-xs font-bold uppercase tracking-widest text-gray-700">Sermon Slideshow</span>
                         </div>
-                        
-                        <div class="carousel-item absolute inset-0 w-full h-full transition-all duration-700 ease-in-out opacity-0" data-index="1">
-                            <div class="w-full h-full flex items-center justify-center">
-                                <img src="{{ asset('images/churchAct2.jpg') }}"
-                                     alt="Community Gathering"
-                                     class="rounded-2xl mx-auto h-full w-auto object-contain"
-                                     style="max-width: 100%; max-height: 100%; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);"
-                                     loading="eager"
-                                     onerror="console.error('Error loading image:', this.src); this.src='https://placehold.co/800x500/7e22ce/ffffff?text=Community+Gathering'">
-                            </div>
-                        </div>
-                        
-                        <div class="carousel-item absolute inset-0 w-full h-full transition-all duration-700 ease-in-out opacity-0" data-index="2">
-                            <div class="w-full h-full flex items-center justify-center">
-                                <img src="{{ asset('images/churchAct3.jpg') }}"
-                                     alt="Bible Study"
-                                     class="rounded-2xl mx-auto h-full w-auto object-contain"
-                                     style="max-width: 100%; max-height: 100%; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);"
-                                     loading="eager"
-                                     onerror="console.error('Error loading image:', this.src); this.src='https://placehold.co/800x500/7e22ce/ffffff?text=Bible+Study'">
-                            </div>
-                        </div>
+                        <span class="text-xs font-mono font-semibold text-gray-500">
+                            <span x-text="String(current + 1).padStart(2, '0')"></span> / <span x-text="String(slides.length).padStart(2, '0')"></span>
+                        </span>
                     </div>
-                    <!-- Carousel Indicators -->
-                    <div class="absolute bottom-1 left-0 right-0 flex justify-center space-x-2 z-10">
-                        <button class="carousel-indicator w-10 h-1.5 rounded-full bg-black/30 hover:bg-black/70 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" data-slide-to="0" aria-label="Go to slide 1"></button>
-                        <button class="carousel-indicator w-10 h-1.5 rounded-full bg-black/30 hover:bg-black/70 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" data-slide-to="1" aria-label="Go to slide 2"></button>
-                        <button class="carousel-indicator w-10 h-1.5 rounded-full bg-black/30 hover:bg-black/70 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" data-slide-to="2" aria-label="Go to slide 3"></button>
+
+                    <!-- 16:9 viewport -->
+                    <div class="relative bg-gradient-to-br from-gray-100 to-gray-50" style="aspect-ratio: 16 / 9;">
+
+                        <template x-for="(slide, idx) in slides" :key="idx">
+                            <div class="absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center p-2"
+                                 :style="{ opacity: current === idx ? 1 : 0, zIndex: current === idx ? 2 : 1 }">
+                                <img :src="slide.url" :alt="'Slide ' + (idx + 1)"
+                                     class="max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-md"
+                                     :loading="idx === 0 ? 'eager' : 'lazy'">
+                            </div>
+                        </template>
+
+                        <!-- Prev / Next buttons -->
+                        <button @click="prev()" type="button"
+                                class="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center bg-white hover:bg-blue-50 text-blue-700 rounded-full shadow-lg transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                aria-label="Previous slide">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button @click="next()" type="button"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center bg-white hover:bg-blue-50 text-blue-700 rounded-full shadow-lg transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                aria-label="Next slide">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Footer with progress dots -->
+                    <div class="px-5 py-4 bg-white border-t border-gray-100">
+                        <div class="flex justify-center items-center gap-2 flex-wrap">
+                            <template x-for="(slide, idx) in slides" :key="'dot-' + idx">
+                                <button @click="goTo(idx)" type="button"
+                                        :class="current === idx ? 'bg-gradient-to-r from-blue-500 to-indigo-600 w-10' : 'bg-gray-300 hover:bg-gray-400 w-2.5'"
+                                        class="h-2.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        :aria-label="'Go to slide ' + (idx + 1)"></button>
+                            </template>
+                        </div>
+                        <p class="text-center text-xs text-gray-500 mt-3">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Auto-advances every 6 seconds · Hover to pause · Use arrow keys to navigate
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+@push('scripts')
+<script>
+function sermonCarousel(count) {
+    return {
+        slides: @json(collect($sermon->slides)->map(fn($p) => ['url' => asset(ltrim($p, '/'))])),
+        current: 0,
+        timer: null,
+        delay: 6000,
+        paused: false,
+
+        init() {
+            this.start();
+            // Pause when tab is not visible
+            document.addEventListener('visibilitychange', () => {
+                document.hidden ? this.pause() : this.resume();
+            });
+        },
+        start() {
+            this.stop();
+            if (this.slides.length <= 1) return;
+            this.timer = setInterval(() => {
+                if (!this.paused) this.next();
+            }, this.delay);
+        },
+        stop() {
+            if (this.timer) { clearInterval(this.timer); this.timer = null; }
+        },
+        pause() { this.paused = true; },
+        resume() { this.paused = false; },
+        next() { this.current = (this.current + 1) % this.slides.length; },
+        prev() { this.current = (this.current - 1 + this.slides.length) % this.slides.length; },
+        goTo(idx) { this.current = idx; },
+    };
+}
+</script>
+@endpush
+
+@endif
 
 <!-- Announcements & Events Section -->
 <section class="py-20 bg-white lazy-section">
@@ -1156,180 +1253,11 @@
 </section>
 
 <script>
-    // Carousel functionality
-    class ChurchCarousel {
-        constructor() {
-            this.carousel = document.getElementById('gallery-carousel');
-            if (!this.carousel) return;
-            
-            this.items = Array.from(document.querySelectorAll('.carousel-item'));
-            this.prevBtn = document.getElementById('prevBtn');
-            this.nextBtn = document.getElementById('nextBtn');
-            this.indicators = document.querySelectorAll('.carousel-indicator');
-            this.currentIndex = 0;
-            this.isTransitioning = false;
-            this.autoSlideInterval = null;
-            this.slideDuration = 5000; // 5 seconds
-            
-            this.init();
-        }
-        
-        init() {
-            console.log('Initializing carousel...');
-            
-            // Set initial state
-            this.items.forEach((item, index) => {
-                if (index === 0) {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateX(0)';
-                    item.style.zIndex = '2';
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateX(100%)';
-                    item.style.zIndex = '1';
-                }
-                item.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
-                item.style.willChange = 'opacity, transform';
-                
-                // Debug image loading
-                const img = item.querySelector('img');
-                if (img) {
-                    img.onload = () => console.log(`Image loaded: ${img.src}`);
-                    img.onerror = () => console.error(`Error loading image: ${img.src}`);
-                }
-            });
-            
-            // Set up event listeners
-            if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prevSlide());
-            if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.nextSlide());
-            
-            // Touch events for mobile
-            this.carousel.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
-            this.carousel.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
-            
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') this.prevSlide();
-                if (e.key === 'ArrowRight') this.nextSlide();
-            });
-            
-            // Indicator clicks
-            this.indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => this.goToSlide(index));
-            });
-            
-            // Start auto-slide
-            this.startAutoSlide();
-            
-            // Pause on hover
-            this.carousel.addEventListener('mouseenter', () => this.pauseAutoSlide());
-            this.carousel.addEventListener('mouseleave', () => this.startAutoSlide());
-        }
-        
-        showSlide(index) {
-            if (this.isTransitioning || index < 0 || index >= this.items.length) return;
-            
-            this.isTransitioning = true;
-            const direction = index > this.currentIndex ? 1 : -1;
-            const currentSlide = this.items[this.currentIndex];
-            const nextSlide = this.items[index];
-            
-            // Set up initial states
-            nextSlide.style.transform = direction === 1 ? 'translateX(100%)' : 'translateX(-100%)';
-            nextSlide.style.opacity = '1';
-            nextSlide.style.zIndex = '2';
-            
-            // Animate
-            requestAnimationFrame(() => {
-                if (currentSlide) {
-                    currentSlide.style.transform = direction === 1 ? 'translateX(-100%)' : 'translateX(100%)';
-                    currentSlide.style.opacity = '0';
-                }
-                
-                nextSlide.style.transform = 'translateX(0)';
-                this.currentIndex = index;
-                this.updateIndicators();
-                
-                // Reset transition flag
-                setTimeout(() => {
-                    if (currentSlide) {
-                        currentSlide.style.zIndex = '1';
-                    }
-                    this.isTransitioning = false;
-                }, 700);
-            });
-        }
-        
-        nextSlide() {
-            const nextIndex = (this.currentIndex + 1) % this.items.length;
-            this.showSlide(nextIndex);
-            this.resetAutoSlide();
-        }
-        
-        prevSlide() {
-            const prevIndex = (this.currentIndex - 1 + this.items.length) % this.items.length;
-            this.showSlide(prevIndex);
-            this.resetAutoSlide();
-        }
-        
-        goToSlide(index) {
-            if (index === this.currentIndex) return;
-            this.showSlide(index);
-            this.resetAutoSlide();
-        }
-        
-        updateIndicators() {
-            this.indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('bg-white/70', index === this.currentIndex);
-                indicator.classList.toggle('bg-white/30', index !== this.currentIndex);
-            });
-        }
-        
-        startAutoSlide() {
-            this.pauseAutoSlide();
-            this.autoSlideInterval = setInterval(() => this.nextSlide(), this.slideDuration);
-        }
-        
-        pauseAutoSlide() {
-            if (this.autoSlideInterval) {
-                clearInterval(this.autoSlideInterval);
-                this.autoSlideInterval = null;
-            }
-        }
-        
-        resetAutoSlide() {
-            this.pauseAutoSlide();
-            this.startAutoSlide();
-        }
-        
-        handleTouchStart(e) {
-            this.touchStartX = e.touches[0].clientX;
-        }
-        
-        handleTouchEnd(e) {
-            if (!this.touchStartX) return;
-            
-            const touchEndX = e.changedTouches[0].clientX;
-            const diff = this.touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > 50) { // Minimum swipe distance
-                if (diff > 0) {
-                    this.nextSlide();
-                } else {
-                    this.prevSlide();
-                }
-            }
-            
-            this.touchStartX = null;
-        }
-    }
-    
     // Initialize everything when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
         try {
-            // Initialize carousel
-            const carousel = new ChurchCarousel();
-            
+            // (Old carousel removed — Alpine.js handles the new sermon carousel)
+
             // Initialize particles
             initParticles();
             
@@ -1423,6 +1351,12 @@
         document.querySelectorAll('.lazy-section').forEach(section => {
             lazySectionObserver.observe(section);
         });
+        } catch (error) {
+            console.error('Error initializing page animations:', error);
+            // Failsafe: reveal all lazy sections immediately so content is visible even if observers fail
+            document.querySelectorAll('.lazy-section').forEach(el => el.classList.add('is-visible'));
+        }
+    });
 
     // Smooth scroll behavior
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1472,53 +1406,7 @@
         }
     }
     
-    // Initialize carousel with error handling
-    function initCarousel() {
-        try {
-            const carousel = document.getElementById('gallery-carousel');
-            if (!carousel) return;
-            
-            const items = document.querySelectorAll('.carousel-item');
-            if (items.length > 0) {
-                items[0].style.opacity = '1';
-                items[0].style.transform = 'translateX(0)';
-                items[0].style.position = 'relative';
-                items[0].style.zIndex = '1';
-            }
-        } catch (error) {
-            console.error('Error initializing carousel:', error);
-        }
-    }
-    
-    // Call initialization functions when DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', () => {
-        initCarousel();
-        initParticles();
-    });
-            
-            // Then initialize the carousel
-            initCarousel();
-            startAutoSlide();
-            console.log('Carousel initialized successfully');
-        } catch (error) {
-            console.error('Error initializing carousel:', error);
-            // Fallback: Show first slide statically
-            if (items.length > 0) {
-                items[0].style.opacity = '1';
-                items[0].style.transform = 'translateX(0)';
-                items[0].style.position = 'relative';
-                items[0].style.zIndex = '1';
-            }
-        }      
-        // Clean up event listeners on unmount
-        return () => {
-            stopAutoSlide();
-            if (nextBtn) nextBtn.removeEventListener('click', handleNextClick);
-            if (prevBtn) prevBtn.removeEventListener('click', handlePrevClick);
-            window.removeEventListener('blur', stopAutoSlide);
-            window.removeEventListener('focus', startAutoSlide);
-        };
-    });
+    // (Carousel logic removed — Alpine.js handles the new sermon slides carousel)
 </script>
 
 <!-- Floating Join Button -->

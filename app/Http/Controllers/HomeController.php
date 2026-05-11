@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announcement;
 use App\Models\Event;
-use Illuminate\Http\Request;
+use App\Models\SermonSlide;
 
 class HomeController extends Controller
 {
@@ -22,6 +22,8 @@ class HomeController extends Controller
             ->take(5)
             ->get();
 
-        return view('home', compact('announcements', 'upcomingEvents'));
+        $sermon = SermonSlide::published()->first();
+
+        return view('home', compact('announcements', 'upcomingEvents', 'sermon'));
     }
 }
