@@ -310,12 +310,21 @@
                         </a>
                         <a href="{{ route('announcements.index') }}" class="nav-link {{ request()->routeIs('announcements.*') ? 'active' : '' }}">
                             <i class="fas fa-bullhorn mr-1"></i> Announcements
+                            @if(($navCounts['announcements'] ?? 0) > 0)
+                                <span class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 text-[0.65rem] font-bold text-white bg-blue-600 rounded-full">{{ $navCounts['announcements'] }}</span>
+                            @endif
                         </a>
                         <a href="{{ route('events.index') }}" class="nav-link {{ request()->routeIs('events.*') ? 'active' : '' }}">
                             <i class="fas fa-calendar-alt mr-1"></i> Events
+                            @if(($navCounts['events'] ?? 0) > 0)
+                                <span class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 text-[0.65rem] font-bold text-white bg-blue-600 rounded-full">{{ $navCounts['events'] }}</span>
+                            @endif
                         </a>
                         <a href="{{ route('schedules.index') }}" class="nav-link {{ request()->routeIs('schedules.*') ? 'active' : '' }}">
                             <i class="fas fa-clock mr-1"></i> Schedule
+                            @if(($navCounts['schedules'] ?? 0) > 0)
+                                <span class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 text-[0.65rem] font-bold text-white bg-blue-600 rounded-full">{{ $navCounts['schedules'] }}</span>
+                            @endif
                         </a>
                         <a href="{{ route('church-people.index') }}" class="nav-link {{ request()->routeIs('church-people.*') ? 'active' : '' }}">
                             <i class="fas fa-users mr-1"></i> Our Team
@@ -389,14 +398,23 @@
                     <a href="{{ route('home') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('home') ? 'bg-gray-50 text-blue-700' : '' }}">
                         <i class="fas fa-home mr-2"></i> Home
                     </a>
-                    <a href="{{ route('announcements.index') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('announcements.*') ? 'bg-gray-50 text-blue-700' : '' }}">
-                        <i class="fas fa-bullhorn mr-2"></i> Announcements
+                    <a href="{{ route('announcements.index') }}" @click="mobileOpen = false" class="flex items-center justify-between px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('announcements.*') ? 'bg-gray-50 text-blue-700' : '' }}">
+                        <span><i class="fas fa-bullhorn mr-2"></i> Announcements</span>
+                        @if(($navCounts['announcements'] ?? 0) > 0)
+                            <span class="inline-flex items-center justify-center min-w-[1.5rem] h-6 px-2 text-xs font-bold text-white bg-blue-600 rounded-full">{{ $navCounts['announcements'] }}</span>
+                        @endif
                     </a>
-                    <a href="{{ route('events.index') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('events.*') ? 'bg-gray-50 text-blue-700' : '' }}">
-                        <i class="fas fa-calendar-alt mr-2"></i> Events
+                    <a href="{{ route('events.index') }}" @click="mobileOpen = false" class="flex items-center justify-between px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('events.*') ? 'bg-gray-50 text-blue-700' : '' }}">
+                        <span><i class="fas fa-calendar-alt mr-2"></i> Events</span>
+                        @if(($navCounts['events'] ?? 0) > 0)
+                            <span class="inline-flex items-center justify-center min-w-[1.5rem] h-6 px-2 text-xs font-bold text-white bg-blue-600 rounded-full">{{ $navCounts['events'] }}</span>
+                        @endif
                     </a>
-                    <a href="{{ route('schedules.index') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('schedules.*') ? 'bg-gray-50 text-blue-700' : '' }}">
-                        <i class="fas fa-clock mr-2"></i> Schedule
+                    <a href="{{ route('schedules.index') }}" @click="mobileOpen = false" class="flex items-center justify-between px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('schedules.*') ? 'bg-gray-50 text-blue-700' : '' }}">
+                        <span><i class="fas fa-clock mr-2"></i> Schedule</span>
+                        @if(($navCounts['schedules'] ?? 0) > 0)
+                            <span class="inline-flex items-center justify-center min-w-[1.5rem] h-6 px-2 text-xs font-bold text-white bg-blue-600 rounded-full">{{ $navCounts['schedules'] }}</span>
+                        @endif
                     </a>
                     <a href="{{ route('church-people.index') }}" @click="mobileOpen = false" class="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-700 {{ request()->routeIs('church-people.*') ? 'bg-gray-50 text-blue-700' : '' }}">
                         <i class="fas fa-users mr-2"></i> Our Team
